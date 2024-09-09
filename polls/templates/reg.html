@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>VetDim</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+    <header>
+
+        <div class="navig">
+    <a href="index.html">
+    <img src="{% static 'img/logo1.png' %}" class="logo">
+    </a>
+    <ul>
+        <li><a href="index.html"> Головна </a></li>
+
+        <li><a href="reg.html" style="text-decoration: none; color: red; text-transform: uppercase;"> Запис </a></li>
+        <li><a href="survey.html">Опитування</a></li>
+        <span style="color:white">Привіт , {{request.user}} <br /> <span><a href="{%url 'logout'%}" style="color: white; text-transform: uppercase;"> Вийти</a></span></span>
+
+        <div class="dropdown">
+            <button class="dropbtn">Послуги</button>
+            <div class="dropdown-content">
+                <a href="page1.html#1">Вакцинація та чипування</a>
+                <a href="page1.html#2">Інструментальні дослідження</a>
+                <a href="page1.html#3">Лабораторна діагностика</a>
+                <a href="page1.html#4">Огляд і консультація</a>
+                <a href="page1.html#5">Терапевтичні маніпуляції</a>
+                <a href="page1.html#6">Хірургічні маніпуляції</a>
+
+            </div>
+        </div>
+    </ul>
+</div>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetDim</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 50px;
+            margin-left: 550px;
+            margin-right: 500px;
+            background: whitesmoke;
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px lightblue;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: purple;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: mediumpurple;
+        }
+    </style>
+</head>
+
+<body style="background: #FFF9EE;">
+
+
+    <form id="registrationForm" method="post" action="{% url 'reg' %}" >
+        {% csrf_token %}
+        <input type="hidden" id="booking_id" name="booking_id" value="{{ booking_id }}">
+        <label for="name">Ім'я:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="surname">Прізвище:</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="age">Вік тваринки:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="appointmentDate">Дата прийому:</label>
+       <input type="date" id="appointmentDate" name="appointmentDate" min="{{ today_date }}" required>
+
+        <label for="appointmentTime">Час прийому:</label>
+        <select id="appointmentTime" name="appointmentTime" required></select>
+
+
+        <label for="phone">Номер телефона:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Example: 0686525572" required>
+
+        <label for="email">Ел. пошта:</label>
+        <input type="email" id="email" name="email" pattern=".+@.+" maxlength="65" required>
+
+        <label for="petType">Тип улюбленця:</label>
+
+        <select id="petType" name="petType" required>
+            {% for animal in type_animals %}
+                <option value="{{ animal.animal }}">{{ animal.animal }}</option>
+             {% endfor %}
+        </select>
+
+        <label for="petDetails">Особливості улюбленця:</label>
+        <textarea id="petDetails" name="petDetails" rows="4"></textarea>
+
+        <button type="submit" class="registrationForm">Зареєструватися</button>
+
+        <script>
+            var availableSlots = {
+                '2024-06-06': ['10:00', '11:00', '15:00'],
+                '2024-06-07': ['14:00', '16:00', '18:00'],
+                '2024-06-08': ['12:00', '13:00', '16:00'],
+              
+            };
+
+
+            function updateAppointmentTime() {
+                var date = document.getElementById('appointmentDate').value;
+                var timeSelect = document.getElementById('appointmentTime');
+                timeSelect.innerHTML = '';
+
+                if (date in availableSlots) {
+                    availableSlots[date].forEach(function (time) {
+                        var option = document.createElement('option');
+                        option.value = time;
+                        option.textContent = time;
+                        timeSelect.appendChild(option);
+                    });
+                }
+            }
+
+           
+
+            document.getElementById('appointmentDate').addEventListener('change', updateAppointmentTime);
+         
+            function submitForm() {
+                var form = document.getElementById('registrationForm');
+
+                var name = document.getElementById('name').value;
+                var surname = document.getElementById('surname').value;
+                var age = document.getElementById('age').value;
+                var appointmentDate = document.getElementById('appointmentDate').value;
+                var appointmentTime = document.getElementById('appointmentTime').value;
+              
+                var phone = document.getElementById('phone').value;
+                var email = document.getElementById('email').value;
+                var petType = document.getElementById('petType').value;
+                var petDetails = document.getElementById('petDetails').value;
+
+                if (name && surname && age && appointmentDate && appointmentTime && phone && isValidPhone(phone) && isValidEmail(email) && petType) {
+                    var SuccessMessage = 'Реєстрація успішна!';
+                    alert(SuccessMessage);
+                    form.submit();
+                } else {
+                    var errorMessage = 'Будь ласка, заповніть всі обов\'язкові поля правильно:\n';
+                    if (!name) errorMessage += '- Введіть ім\'я\n';
+                    if (!surname) errorMessage += '- Введіть прізвище\n';
+                    if (!age) errorMessage += '- Введіть вік\n';
+                    if (!appointmentDate) errorMessage += '- Введіть дату прийому\n';
+                    if (!appointmentTime) errorMessage += '- Виберіть час прийому\n';
+                    if (!phone || !isValidPhone(phone)) errorMessage += '- Введіть коректний номер телефону\n';
+                    if (!email || !isValidEmail(email)) errorMessage += '- Введіть коректну адресу ел. пошти\n';
+                    if (!petType) errorMessage += '- Оберіть тип улюбленця\n';
+
+                    alert(errorMessage);
+                }
+            }
+
+            function isValidPhone(phone) {
+                var phonePattern = /^[0-9]{10}$/;
+                return phonePattern.test(phone);
+            }
+
+            function isValidEmail(email) {
+                var emailPattern = /.+@.+/;
+                return emailPattern.test(email);
+            }
+        </script>
+    </form>
+
+</body>
+
+</html>

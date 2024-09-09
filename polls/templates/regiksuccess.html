@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+
+    <title>VetDim</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+    <header>
+
+        <div class="navig">
+    <a href="index.html">
+    <img src="{% static 'img/logo1.png' %}" class="logo">
+    </a>
+    <ul>
+        <li><a href="index.html" > Головна </a></li>
+       
+        <li><a href="reg.html" style="text-decoration: none; color: red; text-transform: uppercase;"> Запис </a></li>
+        <li><a href="survey.html">Опитування</a></li>
+
+        <div class="dropdown" >
+            <button class="dropbtn">Послуги</button>
+            <div class="dropdown-content">
+                <a href="page1.html#1">Вакцинація та чипування</a>
+                <a href="page1.html#2">Інструментальні дослідження</a>
+                <a href="page1.html#3">Лабораторна діагностика</a>
+                <a href="page1.html#4">Огляд і консультація</a>
+                <a href="page1.html#5">Терапевтичні маніпуляції</a>
+                <a href="page1.html#6">Хірургічні маніпуляції</a>
+
+            </div>
+        </div>
+    </ul>
+</div>
+
+
+
+</head>
+
+
+<style>
+
+.Thxu{
+
+text-align: center;
+padding: 20px;
+margin-top: 200px;
+margin-left: 550px;
+margin-right: 500px;
+background: whitesmoke;
+border-radius: 20px;
+box-shadow: 2px 2px 10px lightblue;
+margin-bottom: 20px;
+
+
+
+}
+
+</style>
+
+
+<body style="background: #fff9ee;">
+
+<div class = "Thxu">
+    <h3 style="padding-bottom: 20px;">Ви успішно зареєстрували аккаунт ! </h3>
+    <a href="{% url 'login' %}">Увійти в свій кабинет</a>
+</div>
+
+
+
+</body>
+</html>

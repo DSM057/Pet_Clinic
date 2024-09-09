@@ -1,0 +1,121 @@
+
+{% load static %}
+<html>
+<head>
+
+    <title>VetDim</title>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+    <header>
+
+        <div class="navig">
+            <a href="index.html">
+                <img src="{% static 'img/logo1.png' %}" class="logo">
+            </a>
+            <ul>
+                <li><a href="index.html"> Home </a></li>
+                <li><a href="#"> Consultation </a></li>
+                <li><a href="{% url 'reg' % }"> Record </a></li>
+                <li><a href="survey.html">Survey</a></li>
+                <li><a href="{% url 'regik' %}" style="text-decoration: none; color: red; text-transform: uppercase;">Registration | Login</a></li>
+               
+
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">Services</button>
+                    <div class="dropdown-content">
+                        <a href="page1.html#1">Vaccination and chipping</a>
+                        <a href="page1.html#2">Instrumental studies</a>
+                        <a href="page1.html#3">Laboratory diagnostics</a>
+                        <a href="page1.html#4">Review and Consultation</a>
+                        <a href="page1.html#5">Therapeutic manipulations</a>
+                        <a href="page1.html#6">Surgical manipulations</a>
+
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            form {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                margin-top: 50px;
+                margin-left: 550px;
+                margin-right: 500px;
+                background: whitesmoke;
+                border-radius: 20px;
+                box-shadow: 2px 2px 10px lightblue;
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 16px;
+                box-sizing: border-box;
+            }
+
+            .button {
+                background-color: purple;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .button:hover {
+                    background-color: mediumpurple;
+                }
+        </style>
+        </head>
+
+        <body style="background: #FFF9EE;">
+
+
+            <form id="registrationForm" method="post" action="{% url 'regik' %}">
+                {% csrf_token %}
+
+                <p>Login</p>
+                {{form.username}}
+
+                {{form.first_name.label}}
+                {{form.first_name}}
+
+                {{form.last_name.label}}
+                {{form.last_name}}
+
+                {{form.email.label}}
+                {{form.email}}
+
+                {{form.password1.label}}
+                {{form.password1}}
+
+
+                {{form.password2.label}}
+                {{form.password2}}
+
+                <input type="submit" name="Create User" class="button" value="Submit" />
+                <p>Do you have an account ? <a href="{% url 'login'%}">Sign in</a></p> 
+
+
+</html>

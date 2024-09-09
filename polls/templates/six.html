@@ -1,0 +1,42 @@
+{% load static %}
+<html>
+<head>
+
+    <title>VetDim</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+    <header>
+
+        <div class="navig">
+            <a href="{% url 'main' %}">
+                <img src="{% static 'img/logo1.png' %}" class="logo">
+            </a>
+            <ul>
+                <li><a href="{% url 'main' %}" style="text-decoration: none; color: red; text-transform: uppercase;"> Головна </a></li>
+               
+                <li><a href="{% url 'reg' %}"> Запис </a></li>
+                <li><a href="{% url 'second' %}">Опитування</a></li>
+                <li><a href="{% url 'regik' %}" style=" color = white;">Реєстрація</a></li>
+                <li><a href="#" style="color = white;">Вхід</a></li>
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">Послуги</button>
+                    <div class="dropdown-content">
+                        <a href="page1.html#1">Вакцинація та чипування</a>
+                        <a href="page1.html#2">Інструментальні дослідження</a>
+                        <a href="page1.html#3">Лабораторна діагностика</a>
+                        <a href="page1.html#4">Огляд і консультація</a>
+                        <a href="page1.html#5">Терапевтичні маніпуляції</a>
+                        <a href="page1.html#6">Хірургічні маніпуляції</a>
+
+                    </div>
+                </div>
+            </ul>
+
+        </div>
+

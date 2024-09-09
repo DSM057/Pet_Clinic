@@ -1,0 +1,137 @@
+{% load static %}
+<html>
+<head>
+	<title>VetDim</title>
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="background: {{link_src}}">
+	<header>
+	<div class="navig">
+	<a href="{% url 'second' %}">
+    <img src="{% static 'img/logo1.png' %}" class="logo">
+	</a>
+    <ul>
+        <li><a href="{% url 'main' %}" style="text-decoration: none; text-transform: uppercase;"> Головна </a></li>
+ 
+        <li><a href="reg.html"> Запис </a></li>
+        <li><a href="#" style="	color: red;">Опитування</a></li>
+
+
+        <div class="dropdown">
+            <button class="dropbtn">Послуги</button>
+            <div class="dropdown-content">
+                <a href="page1.html#1">Вакцинація та чипування</a>
+                <a href="page1.html#2">Інструментальні дослідження</a>
+                <a href="page1.html#3">Лабораторна діагностика</a>
+                <a href="page1.html#4">Огляд і консультація</a>
+                <a href="page1.html#5">Терапевтичні маніпуляції</a>
+                <a href="page1.html#6">Хірургічні маніпуляції</a>
+
+            </div>
+        </div>
+   	 </ul>
+	</div>
+
+    <div class = "surv">
+        <div class="q1"> 
+            <h3>{{link_h1}}</h3>
+            <ul class = "option1">
+                <li>Дуже якісно</li>
+                <li>Якісно</li>
+                <li>Мене задовільняє</li>
+                <li>Погано</li>
+            </ul>            
+        </div>
+        <div class="q2"> 
+            <h3>Оцінка професіоналізму лікарів</h3>
+            <ul class = "option2">
+                <li>5</li>
+                <li>4</li>
+                <li>3</li>
+                <li>2</li>
+            </ul>            
+        </div>
+         <div class="q3"> 
+            <h3>Дієвості наданої допомоги</h3>
+            <ul class = "option3">
+                <li>Моєму улюблинцю допомогло !</li>
+                <li>Знаходимося в процесі лікування , але помітні зміни</li>
+                <li>Лікуємося якийсь час , і немає змін</li>
+                <li>Все стало тільки гірше</li>
+            </ul>            
+        </div>
+        <div class="q4"> 
+            <h3> Оцінка санітарних умов   </h3>
+            <ul class = "option4">
+                <li>5</li>
+                <li>4</li>
+                <li>3</li>
+                <li>2</li>
+            </ul>            
+        </div>
+         <div class="q5"> 
+            <h3>Наявність претензій</h3>
+            <ul class = "option5">
+                <li>Відсутні</li>
+                <li>Так , я вже написав на пошту</li>
+            </ul>            
+        </div>
+    </div>
+
+    <div class = "end">
+        <h1>Дякую за ваші відповіді ! Ось статистика відповідей </h1>
+        <p style="font-weight: bold; color: red; margin-top: 20px;">Якість наданих полслуг </p>
+        <p>
+            Дуже якісно 89%<br>
+            Якісно 9%<br> 
+            Мене задовільняє 1.8%<br>
+            Погано 0.2%<br>
+        </p>
+        <p style="font-weight: bold; color: red;">Оцінка професіоналізму лікарів</p>
+        <p>
+            5 90%<br>
+            4 7%<br> 
+            3 2%<br>
+            2 1%<br>
+        </p>
+        <p style="font-weight: bold; color: red;">Дієвості наданої допомоги</p>
+        <p>
+            Моєму улюблинцю допомогло ! 98% <br> 
+            Знаходимося в процесі лікування , але помітні зміни 2% <br>
+            Лікуємося якийсь час , і немає змін 0% <br>
+            Все стало тільки гірше 0% <br>
+        </p>
+
+        <p style="font-weight: bold; color: red;">Оцінка санітарних умов</p>
+        <p>
+            5 90%<br>
+            4 7%<br> 
+            3 2%<br>
+            2 1%<br>
+        </p>
+
+         <p style="font-weight: bold; color: red;">Наявність претензій</p>
+        <p>
+            Відсутні 100%<br>
+            Так , я вже написав на пошту 0%
+        </p>
+
+        <a href="{% url 'main' %}">Головна сторінка</a>
+
+    </div>
+
+
+<script src="{% static 'js/app.js' %}"></script>
+    
+
+</body>
+</html>		
+
+	</div>
+
+	</header>
+
+
+</body>
+</html>

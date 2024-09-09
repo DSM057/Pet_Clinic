@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+
+	<title>VetDim</title>
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+
+
+</head>
+<body>
+    <header>
+
+        <div class="navig">
+            <a href="{% url 'main' %}">
+                <img src="{% static 'img/logo1.png' %}" class="logo">
+            </a>
+            <ul>
+                <li><a href="{% url 'main' %}" style="text-decoration: none; color: red; text-transform: uppercase;"> Головна </a></li>
+                
+                <li><a href="{% url 'reg' %}"> Запис </a></li>
+                <li><a href="{% url 'second' %}">Опитування</a></li>
+
+
+                {% if user.is_authenticated %}
+                <span style="color:white">Привіт , {{request.user}} <br /> <span><a href="{%url 'logout'%}" style="color: white; text-transform: uppercase;"> Вийти</a></span></span>
+
+
+                <pre>  </pre>
+                {% else %}
+                <li><a href="{% url 'regik' %}" style=" color = white;">Реєстрація | Вхід</a></li>
+                {% endif %}
+
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">Послуги</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'first_choise' %}">Вакцинація та чипування</a>
+                        <a href="page1.html#2">Інструментальні дослідження</a>
+                        <a href="page1.html#3">Лабораторна діагностика</a>
+                        <a href="page1.html#4">Огляд і консультація</a>
+                        <a href="page1.html#5">Терапевтичні маніпуляції</a>
+                        <a href="page1.html#6">Хірургічні маніпуляції</a>
+
+                    </div>
+                </div>
+            </ul>
+
+        </div>
+
+    </header>
+    <div class="hat">
+        <h1 class="welcome">{{link_h1}}</h1>
+    </div>
+
+    </div>
+
+
+    <h1 class="text_adv">Інформація о кліниці</h1>
+
+
+    <div class="middle" style="background-color: {{link_src}}">
+
+
+        <div class="about_us">
+            <img src="{% static 'img/client2.png' %}">
+
+            <div><p class="discription_adv">Ветеринарна клініка - це місце, де ми турбуємося про вашого улюбленця, як про свого власного. </p>	 </div>
+
+
+        </div>
+
+        <style>
+            .not-visble {
+                display: none;
+            }
+        </style>
+
+
+    </div>
+
+    <div class="rewards">
+        <h1 class="text_emp">Наші працівники</h1>
+        <table class="table_cats">
+            <tr>
+                <td>
+                    <img src="{% static 'img/emp1.png' %}">
+                </td>
+                <td>
+                    <img src="{% static 'img/emp2.png' %}">
+                </td>
+                <td>
+                    <img src="{% static 'img/emp3.png' %}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p1 class="name"><b>Кіт Толік</b></p1>
+                    <h4 class="desctiption">Лікар ветеринарної медицини: <br>Досвідчений фахівець, який надає <br>якісні консультації та<br> лікування для вашого улюбленця.</h4>
+                </td>
+                <td>
+                    <p1 class="name"><b>Кіт Василій</b></p1>
+                    <h4 class="desctiption">Медичний брат: Турботливий та уважний,<br> який допомагає в наданні медичної допомоги <br>	та зручності вашому тварині.</h4>
+
+                </td>
+                <td>
+                    <p1 class="name"> <b>Кіт Максим </b></p1>
+                    <h4 class="desctiption">Асистент ветеринара:<br> Помічник, який забезпечує<br> підтримку лікарю та<br> доглядає за комфортом та<br> благополуччям вашого улюбленця.</h4>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="reviews" style="background-color:#EED2B2; ">
+        <h1 style="text-align:center;color:white; text-shadow:grey 2px 4px; font-size:50px;">Записи :</h1>
+        {% if bookings %}
+        <div class="content" id="content">
+            {% for el in bookings %}
+            <div class="single_content" style="padding-top: 20px; padding-left: 50px; text-align: center;">
+                <h1> {{ el.client }} </h1>
+                <h1>Дата прийому : {{ el.date }}</h1>
+            </div>
+            {% endfor %}
+            <div class="spinner not-visble" id="spinner">
+                <span>Завантаження...</span>
+            </div>
+            <div style="margin-left:1025px; margin-top:20px;" class="load_more-btn" id="btn">
+                <button style=" font-size: 24px; padding: 20px; border: none; border-radius: 10px; text-decoration: none; color: white; background: #0B63F6; box-shadow: 0 5px 0 #003CC5; "type="button" class="btn-success">Подивитися більше.</button>
+            </div>
+            <div>
+                <p class="alert not-visble" id="alert">Більше нема постів , щоб загрузити</p>
+            </div>
+            {% else %}
+            <h1 style="text-align:center;color:grey; text-shadow:white 1px 1px; padding-top:20px; padding-bottom:20px;">В базі данних ще нема клієнтів.</h1>
+            {% endif %}
+        </div>
+    </div>
+    {{total_bookings|json_script:"json-total"}}
+
+    <script>
+        //var _current_item = $('.single_content').length
+        //console.log(_current_item);
+
+        const loadBtn = document.getElementById('btn');
+        const spinner = document.getElementById('spinner');
+        let totalItem = 0;  // Инициализация счетчика общего количества элементов
+
+        function loadmoreBook() {
+            const content_container = document.getElementById('content');
+
+            // AJAX запрос для загрузки дополнительных записей
+            $.ajax({
+                url: '{% url "ajax" %}',
+                type: 'GET',
+                data: {
+                    'total_item': totalItem  // Отправка текущего счетчика общего количества элементов на сервер
+                },
+                beforeSend: function () {
+                    loadBtn.classList.add('not-visible');
+                    spinner.classList.remove('not-visible');
+                },
+                success: function (response) {
+                    const bookings = response.bookings;
+
+                    // Итерация по каждой записи и добавление их в content_container
+                    bookings.forEach(booking => {
+                        const client = booking.client__name;
+                        const date = moment(booking.date).format('MMMM D, YYYY, h:mm a');
+
+                        // Создание HTML элементов и добавление их в content_container
+                        const bookingHTML = `<div class="single_content" style="padding-top: 20px; padding-left: 50px; text-align: center;">
+                                        <h1>${client}</h1>
+                                        <h1>Дата прийому : ${date}</h1>
+                                    </div>`;
+                        content_container.innerHTML += bookingHTML;
+                    });
+
+                    // Проверяем, нужно ли скрывать кнопку "Загрузить еще"
+                    $('#btn').addClass('not-visble');
+
+                },
+
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        loadBtn.addEventListener('click', loadmoreBook);
+
+    </script>
+
+    <h1 style="text-align:center; text-shadow:#EED2B2 2px 2px; padding-top:20px;">Тваринки клієнтів:</h1>
+    {% if all_clients %}
+    {% for el in all_clients %}
+    <div style="padding-top:20px; padding-left:50px;">
+        <h1> {{ el.client }} </h1>
+        <table style="background-color:#EED2B2; padding:20px; border-radius:20px;margin-bottom:20px;">
+            <td>
+                <h1>Вік тваринки : {{ el.age }}</h1>
+            </td>
+            <td>
+                <h1>&nbsp; Тип тваринки : {{ el.typeanimal }}</h1>
+            </td>
+        </table>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1 style="text-align:center;color:grey; text-shadow:white 1px 1px; padding-top:20px; padding-bottom:20px;">В базі данних ще нема клієнтів.</h1>
+    {% endif %}
+    </div>
+
+    </header>
+
+    <footer>
+        <div class="info">
+            <table>
+
+                <tr>
+                    <td>
+                        <p class="discription_adv" style="text-align: left;">Наш номер телефона : +123(025)5865-2257 <br> Пошта : vetdim@ownhost.ua <br> Місце розташування : м. Харків , вул. Черепаша , буд. 125 </p>
+                    </td>
+                    <td>
+                        <p class="discription_adv" style="font-size: 20px; padding-top:15px; ">Графік роботи : </p>
+                        <p style="padding-left: 35px; padding-top:5px;font-size: 14px;">понедельник-пятница 08:00–18:00 <br> суббота	08:00–17:00<br>воскресенье	09:00–13:00<br></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </footer>
+</body>
+</html>
