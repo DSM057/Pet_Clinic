@@ -1,8 +1,6 @@
 # This is my small pet project 
 This site was written with Django framework 
 
-Functional : 
-
 # User Registration:
 
 A new user registration form is implemented, where user name, password and other data are entered.
